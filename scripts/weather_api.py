@@ -1,6 +1,7 @@
 import requests
 import json
 import time
+from influxdb_client_3 import Point
 
 Key = "a56cdd37810f0a936a6db3bcadd4188c"
 
