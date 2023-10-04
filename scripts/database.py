@@ -4,8 +4,21 @@ def openDB():
   the database object
   """
   #do something
-return db
+  return db
 
+
+def writeToDB(data):
+  """
+  Writes the data to the database
+  """
+  db = openDB()
+  #write data
+
+
+def closeDB():
+  """
+  Closes the connection to the database
+  """
 
 
 
