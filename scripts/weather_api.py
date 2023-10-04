@@ -16,6 +16,7 @@ def callWeatherAPI(latitude: tuple, longitude: tuple, key: str) -> dict:
   response = requests.get(request_url)
   data = json.dumps(response.text)
   print(data)
+  return data
   
 
 
