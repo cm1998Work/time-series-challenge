@@ -21,7 +21,7 @@ def callWeatherAPI(latitude: tuple, longitude: tuple, key: str) -> dict:
 
 if __name__ == "__main__":
 
-  callWeatherApi((90,90),(180,-180), Key)
+  callWeatherAPI((90,90),(180,-180), Key)
 
 
   
