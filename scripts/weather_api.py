@@ -4,20 +4,27 @@ import time
 from influxdb_client_3 import InfluxDBClient3, Point
 
 
-Key = "a56cdd37810f0a936a6db3bcadd4188c"
 
 
-def callWeatherAPI(latitude: float, longitude: float, key: str) -> dict:
 
+def callWeatherAPI(latitude: float, longitude: float, ) -> dict:
+    """
+    Calls the open weather API for a given latitude and longitude
+    Returns the response parsed as a dict
+    """
+    Key = "a56cdd37810f0a936a6db3bcadd4188c"
     Base_url = "https://api.openweathermap.org/data/2.5/weather?"
-    request_url = f"{Base_url}lat={latitude}&lon={longitude}&appid={key}&units=metric"
+    request_url = f"{Base_url}lat={latitude}&lon={longitude}&appid={Key}&units=metric"
     response = requests.get(request_url)
     data = json.loads(response.text)
 
     return data
 
 def transformResponseData(data: dict)->dict:
-
+    """
+    Transforms the API response so it is suitable to be 
+    written to an influx DB database
+    """
     #Access weather data - we will use temp and wind
     temp = data['main']
     wind = data['wind']
@@ -90,6 +97,6 @@ def closeDB(db):
 
 if __name__ == "__main__":
 
-    data = callWeatherAPI(51.5072, -0.118092, Key) #Latitude and longitude for London passed to function
+    data = callWeatherAPI(51.5072, -0.118092) #Latitude and longitude for London passed to function
     transformed_data = transformResponseData(data)
     writeToDB(transformed_data)
