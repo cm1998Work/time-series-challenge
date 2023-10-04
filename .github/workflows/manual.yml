@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./
+        working-directory: ./scripts
     steps:
     - name: Run script
-      run: ./weather_api.py
+      run: bash weather_api.py
