@@ -16,7 +16,7 @@ def callWeatherAPI(latitude: float, longitude: float, key: str) -> dict:
   Base_url = "https://api.openweathermap.org/data/3.0/onecall?"
   request_url = f"{Base_url}lat={latitude}&lon={longitude}&appid={key}&units=metric"
   response = requests.get(request_url)
-  data = json.dumps(response.text)
+  data = json.loads(response.text)
   logging.info(data)
   
   return data
