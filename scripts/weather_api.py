@@ -33,10 +33,10 @@ def TransformResponseData(data: dict)->dict:
 
   #Create data structure which can be written to influx DB
   transformed_data = {
-    'measurement' = "Weather",
-    'tags' = {'location':'London'},
-    fields:{},
-    time: int(time.time() * 1000) 
+    'measurement':"Weather",
+    'tags':{'location':'London'},
+    'fields':{},
+    time:int(time.time() * 1000) 
   }
   for key, value in current.items():
     transformed_data[fields][key] = value
