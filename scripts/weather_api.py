@@ -54,7 +54,7 @@ if __name__ == "__main__":
 
   data = callWeatherAPI(51.5072, -0.118092, Key) #Latitude and longitude for London passed to function
   transformed_data = transformResponseData(data)
-  writeToDB(data)
+  writeToDB(transformed_data)
 
 
   
