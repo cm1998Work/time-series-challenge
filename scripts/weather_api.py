@@ -45,17 +45,6 @@ def TransformResponseData(data: dict)->dict:
   return transformed_data
     
     
-    
-
-    
-
-  
-
-  
-  
-  return current
-  
-  
 
   
   
