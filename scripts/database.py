@@ -1,5 +1,4 @@
-import influxdb_client
-from influxdb_client.client.write_api import SYNCHRONOUS
+from influxdb_client_3 import InfluxDBClient3, Point
 
 
 
@@ -8,15 +7,14 @@ def openDB():
   Opens a connection to the database and returns
   the database object
   """
-  
-  url = "https://us-east-1-1.aws.cloud2.influxdata.com"
+  host = "https://us-east-1-1.aws.cloud2.influxdata.com"
   token = "Toh-HGqnerXAdabwVlJFWlLUA1nlGlZVQypF8SB9HA6hVeBJTleaAAHz8ymTvXT7JRioe7e5g1FErjVRGHTWfA=="
-  org = "f5ccff96eda36a47"
+  org = "Data"
   
 
-  client = influxdb_client.InfluxDBClient(
-    url=url,
-    token=API_KEY,
+  client = InfluxDBClient3(
+    host=host,
+    token=token,
     org=org
   )
   
@@ -31,10 +29,13 @@ def writeToDB(data: dict):
   Writes the data to the database
   """
   db = openDB()
-  bucket = "2a4772c950afd037"
+  print(db)
+  database = "challenge"
 
-  write_api = db.write_api(write_options=SYNCHRONOUS)
-  write_api.write(bucket=bucket, r=data)
+  #write_api = db.write_api(write_options=SYNCHRONOUS)
+  db.write(database=database, r=data)
+
+  closeDB(db)
   
 
 
@@ -43,6 +44,3 @@ def closeDB(db):
   Closes the connection to the database
   """
   db.close()
-
-
-
