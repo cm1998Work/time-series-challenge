@@ -1,23 +1,22 @@
 import requests
-import logging
 import json
 import time
-from database import openDB, writeToDB, closeDB
+
 Key = "a56cdd37810f0a936a6db3bcadd4188c"
 
 
 def callWeatherAPI(latitude: float, longitude: float, key: str) -> dict:
+   
   """
   Builds an API request for the OpenWeather API based on the parameters 
   passed to the function. 
   Response is parsed as a dict and returned.
   """
   
-  Base_url = "https://api.openweathermap.org/data/3.0/onecall?"
+  Base_url = "https://api.openweathermap.org/data/2.5/weather?"
   request_url = f"{Base_url}lat={latitude}&lon={longitude}&appid={key}&units=metric"
   response = requests.get(request_url)
   data = json.loads(response.text)
-  logging.info(data)
   
   return data
 
@@ -26,31 +25,29 @@ def transformResponseData(data: dict)->dict:
   Tranforms the API response so that it is ready to be 
   written to the database
   Inflix DB will accept dictionary style mapping with keys:
-    measurement, tags, fields and time
+  measurement, tags, fields and time
   """
-
-  #Access current weather data and delete weather attribute
-  current = data.current
-  del current['weather'] #Weather attribute value is a dictionary - remove
-
+  
+  #Access weather data - we will use temp and wind
+  temp = data['main']
+  wind = data['wind']
+  time = data['dt']
+  
   #Create data structure which can be written to influx DB
   transformed_data = {
     'measurement':"Weather",
     'tags':{'location':'London'},
     'fields':{},
-    time:int(time.time() * 1000) 
+    'time':time
   }
-  for key, value in current.items():
-    transformed_data[fields][key] = value
-
-  logging.info(transformed_data)
+  for key, value in temp.items():
+    transformed_data['fields'][key] = value
+  for key, value in wind.items():
+    transformed_data['fields'][key] = value
+  
+  
+  print(transformed_data)
   return transformed_data
-    
-    
-
-  
-  
-
 
 if __name__ == "__main__":
 
