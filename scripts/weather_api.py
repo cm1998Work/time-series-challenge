@@ -1,4 +1,5 @@
 import requests
+import logging
 import json
 import time
 from database import openDB, writeToDB, closeDB
@@ -16,6 +17,7 @@ def callWeatherAPI(latitude: float, longitude: float, key: str) -> dict:
   request_url = f"{Base_url}lat={latitude}&lon={longitude}&appid={key}&units=metric"
   response = requests.get(request_url)
   data = json.dumps(response.text)
+  logging.info(data)
   
   return data
 
@@ -41,7 +43,7 @@ def transformResponseData(data: dict)->dict:
   for key, value in current.items():
     transformed_data[fields][key] = value
 
-
+  logging.info(transformed_data)
   return transformed_data
     
     
