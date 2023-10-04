@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: cm1998Work/time-series-challenge
+        working-directory: ./
     steps:
     - name: Run script
       run: ./weather_api.py
