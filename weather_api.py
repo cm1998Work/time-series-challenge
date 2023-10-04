@@ -17,5 +17,11 @@ def callWeatherAPI(latitude: tuple, longitude: tuple, key: str) -> dict:
   data = json.dumps(response.text)
   print(data)
   
-  
+
+
+if __name__ == "__main__":
+
+  callWeatherApi((90,90),(180,-180), Key)
+
+
   
