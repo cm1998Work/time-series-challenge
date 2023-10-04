@@ -1,5 +1,6 @@
 import requests
 import json
+import time
 from database import openDB, writeToDB, closeDB
 Key = "a56cdd37810f0a936a6db3bcadd4188c"
 
@@ -25,17 +26,25 @@ def TransformResponseData(data: dict)->dict:
   Inflix DB will accept dictionary style mapping with keys:
     measurement, tags, fields and time
   """
-  transformed_data = []
+
+  #Access current weather data and delete weather attribute
   current = data.current
   del current['weather'] #Weather attribute value is a dictionary - remove
 
-  measurement = "Weather"
-  tag = {'location':'London')
-  for key, value in current.items()
+  #Create data structure which can be written to influx DB
+  transformed_data = {
+    'measurement' = "Weather",
+    'tags' = {'location':'London'},
+    fields:{},
+    time: int(time.time() * 1000) 
+  }
+  for key, value in current.items():
+    transformed_data[fields][key] = value
+
+
+  return transformed_data
     
     
-    
-    obj = {}
     
 
     
@@ -55,7 +64,7 @@ def TransformResponseData(data: dict)->dict:
 if __name__ == "__main__":
 
   data = callWeatherAPI(51.5072, -0.118092, Key) #Latitude and longitude for London passed to function
-  data = transformResponseData(data)
+  transformed_data = transformResponseData(data)
   writeToDB(data)
 
 
