@@ -24,4 +24,4 @@ jobs:
          python-version: '3.10'
      
      - name: Run script
-       run: python weather_api.py
+       run: scripts/python weather_api.py
