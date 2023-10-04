@@ -19,7 +19,7 @@ def callWeatherAPI(latitude: float, longitude: float, key: str) -> dict:
   
   return data
 
-def TransformResponseData(data: dict)->dict:
+def transformResponseData(data: dict)->dict:
   """
   Tranforms the API response so that it is ready to be 
   written to the database
