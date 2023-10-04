@@ -14,9 +14,9 @@ jobs:
   test:
     # runs a job called test
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    defaults:
+      run:
+        working-directory: cm1998Work/time-series-challenge/edit/main
     steps:
-    # Runs a single command using the runners shell
     - name: Run script
       run: ./weather_api.py
