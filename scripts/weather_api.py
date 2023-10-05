@@ -61,14 +61,11 @@ def openDB():
   org = "Data"
   
 
-  client = InfluxDBClient3(
+  db = InfluxDBClient3(
     host=host,
     token=token,
     org=org
   )
-  
-  return client
-  
   
   return db
 
